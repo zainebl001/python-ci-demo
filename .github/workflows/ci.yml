@@ -23,7 +23,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run tests with coverage
         run: |
+          pip install pytest-cov
           export PYTHONPATH=$PWD
-          pytest --maxfail=5 --disable-warnings
+          pytest --cov=app --maxfail=5 --disable-warnings
+
+
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 .
